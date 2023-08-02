@@ -1,0 +1,21 @@
+cmake_minimum_required(VERSION 3.10)
+project(SFML_Demo)
+
+set(SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src")
+set(INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include")
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
+
+set(SFML_STATIC_LIBRARIES FALSE)
+find_package(SFML COMPONENTS window graphics system)
+
+include_directories(${SFML_INCLUDE_DIR})
+
+file(GLOB_RECURSE SOURCES "${SOURCE_DIR}/*.cpp")
+file(GLOB_RECURSE HEADERS "${INCLUDE_DIR}/*.h")
+
+add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
+target_link_libraries(${PROJECT_NAME} ${SFML_LIBRARIES})
+
